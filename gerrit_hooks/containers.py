@@ -27,6 +27,15 @@ class SupportedHooks:
         COMMIT_RECEIVED, SUBMIT,
     ]
 
+    def __getitem__(self, item):
+        return self.__all__[item]
+
+    def __len__(self):
+        return len(self.__all__)
+
+    def __contains__(self, item):
+        return item in self.__all__
+
 
 class HookFlagDefinitions:
     """Container class for each supported hook's supported CLI flags."""
