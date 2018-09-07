@@ -1,7 +1,7 @@
-# Gerrit Hooks Interfaces
+#Gerrit Hooks Interfaces
 
 This library provides pre-built `argparse.ArgumentParser` instances 
-for gerrit's hooks (see gerrit-hooks plugin for more on those).
+for gerrit's hooks (linked in the [Resources](#resources) section below).
 
 
 It allows developers to get started with gerrit hooks faster, by 
@@ -36,6 +36,4 @@ print("Change ID: {}".format(options.change))
 
 # Resources
 
-## Gerrit Hooks Plugin Repository:
-
-https://gerrit-review.googlesource.com/admin/repos/plugins%2Fhooks
+[Gerrit-Hooks Plugin](https://gerrit-review.googlesource.com/admin/repos/plugins%2Fhooks)
