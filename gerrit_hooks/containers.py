@@ -158,7 +158,27 @@ class HookFlagDefinitions:
         :rtype: Dict
         """
         flag_string = self.__mapping__[item]
+        flag_configuration = {}
+        for match in self.FLAG_PATTERN.finditer(flag_string):
+            flag, description = match.flag, match.description
+            options = {}
+            if (flag in ('--hashtag', '--added', '--removed')
+                    and item == SupportedHooks.HASHTAGS_CHANGED):
+                # These flags may be passed several times; therefore, we need
+                # to store them multiple times. The 'append' action appends
+                # the passed value as a List[str] to the related flag variable
+                # in the namespace. For example::
+                #
+                #   hashtag-changes --hashtag hello --hashtag wonky
+                #
+                # would result in ::
+                #
+                #   >>>options = parse_options()
+                #   >>>options.hashtag
+                #   [['hello'], ['wonky']]
+                options.update({'nargs': '1', 'action': 'append'})
+            flag_configuration[flag] = description, options
         return {
-            match.flag: match.description
+            match.flag: (match.description, {})
             for match in self.FLAG_PATTERN.finditer(flag_string)
         }

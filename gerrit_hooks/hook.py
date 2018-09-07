@@ -13,8 +13,8 @@ def _generate_parser(**cli_kwargs):
     :rtype: argparse.ArgumentParser
     """
     parser = argparse.ArgumentParser()
-    for flag, description in cli_kwargs.items():
-        parser.add_argument(flag, description=description)
+    for flag, description, options in cli_kwargs.items():
+        parser.add_argument(flag, description=description, **options)
     return parser
 
 
