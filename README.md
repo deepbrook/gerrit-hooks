@@ -1,4 +1,4 @@
-#Gerrit Hooks Interfaces
+# Gerrit Hooks Argument Parsers
 
 This library provides pre-built `argparse.ArgumentParser` instances 
 for gerrit's hooks (linked in the [Resources](#resources) section below).
