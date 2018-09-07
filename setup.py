@@ -17,10 +17,14 @@ setup(
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
-        'License :: MIT License',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
+        'Topic :: Software Development',
+        'Topic :: Software Development :: Code Generators',
+        'Topic :: Software Development :: Build Tools',
+        'Topic :: Software Development :: Version Control',
+        'License :: OSI Approved :: MIT License',
     ],
     packages=find_packages(exclude=['contrib', 'docs', 'tests']),
 )
