@@ -1,6 +1,8 @@
 # Gerrit Hooks Interfaces
 
-This library provides argumentparsers for gerrit's hooks-plugin's hook files.
+This library provides pre-built `argparse.ArgumentParser` instances 
+for gerrit's hooks (see gerrit-hooks plugin for more on those).
+
 
 It allows developers to get started with gerrit hooks faster, by 
 getting the parsing of command-line arguments for the various hook types
