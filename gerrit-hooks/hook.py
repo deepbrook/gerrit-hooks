@@ -2,6 +2,8 @@
 import argparse
 import re
 
+
+# RegEx pattern to parse the flag strings contained in HookType class.
 PATTERN = re.compile(r'(?P<flag>--(\w|-)*)\s(?P<description>\<(\w|-|\s)*\>)')
 
 
