@@ -124,8 +124,8 @@ def build_parser_for(hook_type):
     :param str hook_type: The hook type string to generate an argument parser from.
     :rtype: argparse.ArgumentParser
     """
-    patchset_created_flags = flag_string_to_dict(hook_type)
-    return _generate_parser(**patchset_created_flags)
+    cli_flags = flag_string_to_dict(hook_type)
+    return _generate_parser(**cli_flags)
 
 
 def parse_options(hook_type):
