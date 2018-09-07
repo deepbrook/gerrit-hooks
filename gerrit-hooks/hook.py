@@ -126,3 +126,15 @@ def build_parser_for(hook_type):
     """
     patchset_created_flags = flag_string_to_dict(hook_type)
     return _generate_parser(**patchset_created_flags)
+
+
+def parse_options(hook_type):
+    """Build a parser and parse the CLI options for the given hook type.
+
+    :param str hook_type: The type of hook to build and parse options for.
+    :rtype: Type[argparse.NameSpace]
+    """
+    if hook_type not in HookType.__all__:
+        raise ValueError("Unknown Hook type: {}".format(hook_type))
+    return build_parser_for(hook_type).parse_args()
+
