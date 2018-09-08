@@ -26,7 +26,7 @@ Writing hooks using gerrit-hooks' argparsers is easy:
 #!/usr/bin/env/python3
 import gerrit_hooks
 
-options = gerrit_hooks.parse_options(gerrit_hooks.COMMENT_ADDED)
+options = gerrit_hooks.parse_options()
 
 print("Change ID: {}".format(options.change))
 ...
