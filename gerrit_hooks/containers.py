@@ -67,6 +67,7 @@ class HookFlagDefinitions:
                           "--project <project name> --branch <branch> --topic <topic> " \
                           "--author <comment author> --author-username <username> " \
                           "--commit <commit> --comment <comment> " \
+                        # These aren't currently supported!
                           "[--<approval category id> <score> " \
                           "--<approval category id> <score> " \
                           "--<approval category id>-oldValue <score> ...]"
