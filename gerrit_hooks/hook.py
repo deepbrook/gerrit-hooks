@@ -14,7 +14,7 @@ def _generate_parser(**cli_kwargs):
     """
     parser = argparse.ArgumentParser()
     for flag, description, options in cli_kwargs.items():
-        parser.add_argument(flag, description=description, **options)
+        parser.add_argument(flag, description=description, required=False, **options)
     return parser
 
 
