@@ -67,10 +67,10 @@ class HookFlagDefinitions:
                           "--project <project name> --branch <branch> --topic <topic> " \
                           "--author <comment author> --author-username <username> " \
                           "--commit <commit> --comment <comment> " \
-                        # These aren't currently supported!
-                          "[--<approval category id> <score> " \
-                          "--<approval category id> <score> " \
-                          "--<approval category id>-oldValue <score> ...]"
+                          "--Code-Review <score> " \
+                          "--Verified <score> " \
+                          "--Code-Review-oldValue <score>" \
+                          "--Verified-oldValue <score>"
 
     CHANGE_MERGED_FLAGS = "--change <change id> --change-url <change url> " \
                           "--change-owner <change owner> --change-owner-username <username> " \
@@ -150,6 +150,14 @@ class HookFlagDefinitions:
         SupportedHooks.COMMIT_RECEIVED: COMMIT_RECEIVED_FLAGS,
         SupportedHooks.SUBMIT: SUBMIT_FLAGS
     }
+
+    @classmethod
+    def add_approval_category(cls, label):
+        """Extend the comment-added hooks flags with the given custom label.
+
+        :param str label: The label of the approva_category to add.
+        """
+        cls.COMMENT_ADDED_FLAGS += "--{} <score> --{}-oldValue <score>"
 
     def __getitem__(self, item):
         """Return the flags for the given hook name as a dict.

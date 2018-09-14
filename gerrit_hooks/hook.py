@@ -6,6 +6,14 @@ from __main__ import __file__
 from gerrit_hooks.containers import SupportedHooks, HookFlagDefinitions
 
 
+def add_custom_approval_category(label):
+    """Add a custom approval category to the Hook flag definitions.
+
+    :param str label: Label of the approval category.
+    """
+    HookFlagDefinitions.add_approval_category(label)
+
+
 def _generate_parser(**cli_kwargs):
     """Set up an argument parser with the given expected flags as kwargs.
 

@@ -8,14 +8,14 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='gerrit-hooks',
-    version='1.0.0b3',
+    version='1.0.0',
     description='Utility for writing Gerrit Hooks in python',
     long_description=long_description,
     author='Nils Diefenbach',
     author_email='nlsdfnbch.foss@kolabnow.com',
 
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
