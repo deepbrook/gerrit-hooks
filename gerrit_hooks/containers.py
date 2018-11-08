@@ -69,8 +69,8 @@ class HookFlagDefinitions:
                           "--commit <commit> --comment <comment> " \
                           "--Code-Review <score> " \
                           "--Verified <score> " \
-                          "--Code-Review-oldValue <score>" \
-                          "--Verified-oldValue <score>"
+                          "--Code-Review-oldValue <score> " \
+                          "--Verified-oldValue <score> "
 
     CHANGE_MERGED_FLAGS = "--change <change id> --change-url <change url> " \
                           "--change-owner <change owner> --change-owner-username <username> " \
@@ -157,7 +157,8 @@ class HookFlagDefinitions:
 
         :param str label: The label of the approva_category to add.
         """
-        cls.COMMENT_ADDED_FLAGS += "--{} <score> --{}-oldValue <score>"
+        cls.COMMENT_ADDED_FLAGS += "--{} <score> --{}-oldValue <score>".format(label, label)
+        cls.__mapping__[SupportedHooks.COMMENT_ADDED] = cls.COMMENT_ADDED_FLAGS
 
     def __getitem__(self, item):
         """Return the flags for the given hook name as a dict.
@@ -169,7 +170,7 @@ class HookFlagDefinitions:
         flag_string = self.__mapping__[item]
         flag_configuration = {}
         for match in self.FLAG_PATTERN.finditer(flag_string):
-            flag, description = match.flag, match.description
+            flag, description = match.group('flag'), match.group('description')
             options = {}
             if (flag in ('--hashtag', '--added', '--removed')
                     and item == SupportedHooks.HASHTAGS_CHANGED):
@@ -188,6 +189,6 @@ class HookFlagDefinitions:
                 options.update({'nargs': '1', 'action': 'append'})
             flag_configuration[flag] = description, options
         return {
-            match.flag: (match.description, {})
+            match.group('flag'): (match.group('description'), {})
             for match in self.FLAG_PATTERN.finditer(flag_string)
         }
