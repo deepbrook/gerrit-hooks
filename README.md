@@ -45,7 +45,7 @@ import gerrit_hooks
 
 # Let's assume you have a approval category with label 'level-of-amazingness
 # We need to add this to the Hook Flag Definitions class
-gerrit_hooks.add_custom_approval_rating('level-of-amazingness')
+gerrit_hooks.add_custom_approval_category('level-of-amazingness')
 
 options = gerrit_hooks.parse_options()
 
