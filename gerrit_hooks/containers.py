@@ -17,7 +17,7 @@ class SupportedHooks:
     REVIEWER_ADDED = "reviewer-added"
     REVIEWER_DELETED = "reviewer-deleted"
     TOPIC_CHANGED = "topic-changed"
-    HASHTAGS_CHANGED = "hashtag-changed"
+    HASHTAGS_CHANGED = "hashtags-changed"
     CLA_SIGNED = "cla-signed"
 
     __all__ = [
@@ -178,7 +178,7 @@ class HookFlagDefinitions:
                 # the passed value as a List[str] to the related flag variable
                 # in the namespace. For example::
                 #
-                #   hashtag-changes --hashtag hello --hashtag wonky
+                #   hashtags-changed --hashtag hello --hashtag wonky
                 #
                 # would result in ::
                 #
