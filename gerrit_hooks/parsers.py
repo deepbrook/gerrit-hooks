@@ -1,29 +1,23 @@
-"""Python3 utility to build Gerrit Hook CLI Arg parsers."""
+"""Utility methods for creating argparse.ArgumentParser Gerrit Hooks."""
 import argparse
 import pathlib
+
 from __main__ import __file__
 
-from gerrit_hooks.containers import SupportedHooks, HookFlagDefinitions
-
-
-def add_custom_approval_category(label):
-    """Add a custom approval category to the Hook flag definitions.
-
-    :param str label: Label of the approval category.
-    """
-    HookFlagDefinitions.add_approval_category(label)
+from gerrit_hooks.containers import HOOKS, FLAGS
+from gerrit_hooks.utils import normalize_hook_name
 
 
 def _generate_parser(**cli_kwargs):
-    """Set up an argument parser with the given expected flags as kwargs.
+    """Set up an argument parser with the given expected options.
 
-    :param Any kwargs: Flag=Description kwarg pairs.
+    :param Any cli_kwargs:
+        Kwargs containing configuration details for a CLI flag.
     :rtype: argparse.ArgumentParser
     """
     parser = argparse.ArgumentParser()
     for flag, details in cli_kwargs.items():
-        description = details[0]
-        options = details[1]
+        description, options = details
         parser.add_argument(flag, help=description, required=False, **options)
     return parser
 
@@ -31,10 +25,18 @@ def _generate_parser(**cli_kwargs):
 def build_parser_for(hook_type):
     """Build an argument parser for the given hook string.
 
-    :param str hook_type: The hook type string to generate an argument parser from.
+    `hook_type` is normalized to all upper-case letters, and any "-" characters
+    are replaced with under scores ("_"). Most of the time the value of
+    `hook_type` is expected to be the file name, which is also the name of the
+    hook. Since Container classes expect the attribute name as keys, this
+    normalization is necessary in order to avoid KeyErrors.
+
+    :param str hook_type:
+        The hook type string to generate an argument parser from.
     :rtype: argparse.ArgumentParser
     """
-    cli_flags = HookFlagDefinitions()[hook_type]
+    hook_type = normalize_hook_name(hook_type)
+    cli_flags = FLAGS[hook_type]
     return _generate_parser(**cli_flags)
 
 
@@ -50,11 +52,10 @@ def parse_options(hook_type=__file__):
 
     :param str hook_type: The type of hook to build and parse options for.
     :raises ValueError: If hook_type is not found in the SupportedHooks container.
-    :rtype: Type[argparse.NameSpace]
+    :rtype: argparse.NameSpace
     """
     hook_type = pathlib.Path(hook_type).stem
-
-    if hook_type not in SupportedHooks():
-        raise ValueError("Unknown Hook type: {}".format(hook_type))
+    normalized_hook_type = normalize_hook_name(hook_type)
+    if hook_type not in HOOKS:
+        raise ValueError("Unknown Hook type: {}".format(normalized_hook_type))
     return build_parser_for(hook_type).parse_args()
-
